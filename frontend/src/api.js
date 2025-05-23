@@ -1,9 +1,9 @@
-// frontend\src\api.js
+// frontend/src/api.js
 
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/printfulRoute',
+  baseURL: `${import.meta.env.VITE_API_URL}/printfulRoute`,
 });
 
-export const fetchSyncedProducts = () => API.get('/synced'); 
+export const fetchSyncedProducts = () => API.get('/synced');
