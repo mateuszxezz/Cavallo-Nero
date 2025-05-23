@@ -10,7 +10,7 @@ app.use(cors({
   credentials: true,
 }));
 
-const printfulRoutes = require('./src/services/routes/PrintfulRoute');
+const printfulRoutes = require('./src/services/routes/printfulRoute');
 
 app.use(express.json());
 
