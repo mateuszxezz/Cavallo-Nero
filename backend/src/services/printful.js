@@ -1,3 +1,5 @@
+// backend\src\services\printful.js
+
 const axios = require('axios');
 
 const API_BASE_URL = process.env.PRINTFUL_API || 'https://api.printful.com';
