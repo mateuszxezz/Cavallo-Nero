@@ -1,12 +1,7 @@
-// index.js
-
 require('dotenv').config(); // Muito importante carregar antes de tudo
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const printfulRoute = require('./routes/printfulRoute');
-app.use('/printfulRoute', printfulRoute);
-
 
 app.use(cors({
   origin: [
@@ -17,6 +12,10 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// Usa o caminho correto pro printfulRoute:
+const printfulRoutes = require('./src/services/routes/printfulRoute');
+app.use('/printfulRoute', printfulRoutes);
 
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
