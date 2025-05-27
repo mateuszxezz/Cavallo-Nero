@@ -67,8 +67,6 @@ export default function Checkout() {
   }
 };
 
-
-
     if(!produto) return <p className="p-10">DIficil de encontrtar esse produto Produto não encontrado!</p>
 
     return (
