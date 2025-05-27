@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { createOrder } = require('../services/printful');
+const { createOrder } = require('../printful');
 const {
   catalogController,
   syncedProductsController,
