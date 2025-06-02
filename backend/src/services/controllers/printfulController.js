@@ -46,4 +46,5 @@ module.exports = {
 module.exports = {
   catalogController,
   syncedProductsController,
+  createOrderController,
 };
