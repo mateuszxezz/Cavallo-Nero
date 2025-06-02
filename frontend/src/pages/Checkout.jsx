@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
 import CreateOrderTest from "../components/CreateOrderTest";
+import ProductCard from '../components/ProductCard';
 
 export default function Checkout() {
 
@@ -39,23 +40,24 @@ export default function Checkout() {
   e.preventDefault();
 
   const orderData = {
-    recipient: {
-      name: form.name,
-      address1: form.address1,
-      city: form.city,
-      state_code: form.state_code,
-      country_code: form.country_code,
-      zip: form.zip,
-      email: form.email,
-      phone: form.phone,
-    },
-    items: [
-      {
-        variant_id: produto.variantId,
-        quantity: 1,
-      },
-    ],
-  };
+  recipient: {
+    name: form.name,
+    address1: form.address1,
+    city: form.city,
+    state_code: form.state_code,
+    country_code: form.country_code,
+    zip: form.zip,
+    email: form.email,
+    phone: form.phone,
+  },
+ "items": [
+  {
+    "variant_id": 383499868,
+    "quantity": 1
+  }
+]
+};
+console.log("🔍 OrderData:", JSON.stringify(orderData, null, 2));
 
   try {
     const res = await axios.post(`${import.meta.env.VITE_API_URL}/printfulRoute/order`, orderData);

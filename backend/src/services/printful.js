@@ -1,9 +1,17 @@
 // backend\src\services\printful.js
 
+require('dotenv').config();
 const axios = require('axios');
 
-const API_BASE_URL = process.env.PRINTFUL_API || 'https://api.printful.com';
+const PRINTFUL_API = process.env.PRINTFUL_API || 'https://api.printful.com';
 const API_KEY = process.env.PRINTFUL_API_KEY;
+
+const axiosInstance = axios.create({
+  baseURL: PRINTFUL_API,
+  headers: {
+    Authorization: `Bearer ${API_KEY}`,
+  },
+});
 
 const printfulApi = axios.create({
   baseURL: API_BASE_URL,
@@ -29,8 +37,8 @@ async function getSyncedProducts() {
 }
 
 async function createOrder(orderData) {
-  const response = await printfulApi.post('/orders', orderData);
-  return response.data.result;
+  const response = await axiosInstance.post('/orders', orderData);
+  return response.data;
 }
 
 module.exports = {
@@ -39,3 +47,5 @@ module.exports = {
   getSyncedProducts,
   createOrder,
 };
+
+console.log(process.env.PRINTFUL_API_KEY);

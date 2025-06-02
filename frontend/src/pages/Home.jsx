@@ -16,6 +16,36 @@ export default function Home() {
       .catch(err => console.error(err));
   }, []);
 
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  fetchSyncedProducts()
+    .then(res => {
+      setProducts(res.data);
+    })
+    .catch(err => console.error(err))
+    .finally(() => setLoading(false));
+}, []);
+
+if (loading) {
+  return (
+    <div className="min-h-screen bg-white">
+    <header className="bg-white shadow sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-gray-900">🛒 Loja Printful do Maba</h1>
+        </div>
+      </header>
+      <div className="text-center p-32 text-4xl">
+      <i class='bx bx-loader-dots animate-spin'></i>
+      </div>
+      </div>
+  )
+}
+
+  // if (!products.length === 0) {
+  //   return <p className="p-10 text-gray-700"> carregando produto...</p>;
+  // } 
+  
   return (
     <div className="min-h-screen bg-white">
       <header className="bg-white shadow sticky top-0 z-10">

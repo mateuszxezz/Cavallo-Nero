@@ -1,4 +1,4 @@
-// src\services\controllers\printfulController.js
+// backend\src\services\controllers\printfulController.js
 
 const {
   getCatalog,
@@ -24,6 +24,24 @@ async function syncedProductsController(req, res) {
     res.status(500).json({ message: 'Erro ao buscar produtos sincronizados' });
   }
 }
+
+// dentro de printfulController.js
+async function createOrderController(req, res) {
+  try {
+    const result = await createOrder(req.body);
+    res.json(result);
+  } catch (err) {
+    console.error('Error ao criar pedido: ', err.response?.data || err.message);
+    res.status(500).json({ error: 'Erro ao criar pedido!' });
+  }
+}
+
+module.exports = {
+  catalogController,
+  syncedProductsController,
+  createOrderController,
+};
+
 
 module.exports = {
   catalogController,

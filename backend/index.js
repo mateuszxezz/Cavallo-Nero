@@ -1,3 +1,5 @@
+// backend\index.js
+
 require('dotenv').config(); // Muito importante carregar antes de tudo
 const express = require('express');
 const cors = require('cors');
