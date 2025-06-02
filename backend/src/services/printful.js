@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
 });
 
 const printfulApi = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: PRINTFUL_API,
   headers: {
     Authorization: `Bearer ${API_KEY}`,
     'Content-Type': 'application/json',
