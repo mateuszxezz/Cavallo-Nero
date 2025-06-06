@@ -1,17 +1,8 @@
-// backend\src\services\routes\printfulRoute.js
-
+// backend/src/services/routes/printfulRoute.js
 const express = require('express');
 const router = express.Router();
-const { createOrder } = require('../printful');
-const {
-  catalogController,
-  syncedProductsController,
-  createOrderController,
-} = require('../controllers/printfulController');
+const { createOrderHandler } = require('../controllers/createOrderController');
 
-router.get('/catalog', catalogController);
-router.get('/synced', syncedProductsController);
-
-router.post('/order', createOrderController);
+router.post('/order', createOrderHandler);
 
 module.exports = router;

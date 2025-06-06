@@ -1,24 +1,19 @@
-// backend\index.js
-
-require('dotenv').config(); // Muito importante carregar antes de tudo
+// backend/index.js
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://cavallo-nero.vercel.app',
-  ],
-  credentials: true,
-}));
-
+// Middlewares
+app.use(cors());
 app.use(express.json());
 
-// Usa o caminho correto pro printfulRoute:
-const printfulRoutes = require('./src/services/routes/printfulRoute');
-app.use('/printfulRoute', printfulRoutes);
+// Rotas
+const printfulRoute = require('./src/services/routes/printfulRoute');
+app.use('/api/printful', printfulRoute);
 
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
+// Inicializar servidor
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });

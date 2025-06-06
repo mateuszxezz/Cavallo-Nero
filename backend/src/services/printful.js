@@ -1,51 +1,30 @@
-// backend\src\services\printful.js
-
-require('dotenv').config();
+// backend/src/services/printful.js
 const axios = require('axios');
 
-const PRINTFUL_API = process.env.PRINTFUL_API || 'https://api.printful.com';
+const API_BASE_URL = 'https://api.printful.com';
 const API_KEY = process.env.PRINTFUL_API_KEY;
 
-const axiosInstance = axios.create({
-  baseURL: PRINTFUL_API,
-  headers: {
-    Authorization: `Bearer ${API_KEY}`,
-  },
-});
+// Headers da nova API
+const headers = {
+  Authorization: `Bearer ${API_KEY}`,
+  'Content-Type': 'application/json',
+};
 
-const printfulApi = axios.create({
-  baseURL: PRINTFUL_API,
-  headers: {
-    Authorization: `Bearer ${API_KEY}`,
-    'Content-Type': 'application/json',
-  },
-});
-
-async function getCatalog() {
-  const response = await printfulApi.get('/products');
-  return response.data.result;
-}
-
-async function getProductDetails(productId) {
-  const response = await printfulApi.get(`/products/${productId}`);
-  return response.data.result;
-}
-
-async function getSyncedProducts() {
-  const response = await printfulApi.get('/store/products');
-  return response.data.result;
-}
-
+// Criar pedido
 async function createOrder(orderData) {
-  const response = await axiosInstance.post('/orders', orderData);
-  return response.data;
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/orders`,
+      orderData,
+      { headers }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao criar pedido na Printful:', error.response?.data || error.message);
+    throw error;
+  }
 }
 
 module.exports = {
-  getCatalog,
-  getProductDetails,
-  getSyncedProducts,
   createOrder,
 };
-
-console.log(process.env.PRINTFUL_API_KEY);
