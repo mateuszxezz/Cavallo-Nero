@@ -3,6 +3,12 @@
 import { useEffect, useState } from 'react';
 import { fetchSyncedProducts } from '../api';
 import ProductCard from '../components/ProductCard';
+import axios from 'axios';
+
+export const fetchSyncedProducts = () => {
+  return axios.get('/api/printful/synced');
+};
+
 
 export default function Home() {
   const [products, setProducts] = useState([]);

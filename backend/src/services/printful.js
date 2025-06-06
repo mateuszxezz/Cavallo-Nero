@@ -4,6 +4,11 @@ const axios = require('axios');
 const API_BASE_URL = 'https://api.printful.com';
 const API_KEY = process.env.PRINTFUL_API_KEY;
 
+const { syncedProductsController } = require('../controllers/printfulController');
+
+router.get('/synced', syncedProductsController);
+
+
 // Headers da nova API
 const headers = {
   Authorization: `Bearer ${API_KEY}`,
